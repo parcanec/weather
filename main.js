@@ -1,3 +1,5 @@
+import { toStorage } from "./local.js";
+
 const tabs = document.querySelector(".info");
 const tabButton = tabs.querySelectorAll(".tabs_item"); 
 const contents = tabs.querySelectorAll(".tabs_block"); 
@@ -94,7 +96,9 @@ function delCity(event, city) {
     city = event.target.previousElementSibling.textContent
     let position = cities.findIndex(anyCity => anyCity == city)
     cities.splice(position, 1)
-    renderFavorites()
+    toStorage(cities)
+    cities = JSON.parse(localStorage.getItem("citiesArray"))  
+    renderFavorites()  
 }
 
 function addCity() {
@@ -107,12 +111,20 @@ function addCity() {
             cities.push(city)
         }
     } else {
-        throw new Error('Отсутствует город, для добавления')
+        throw new Error('Отсутствует город для добавления')
     }
+    toStorage(cities)
+    cities = JSON.parse(localStorage.getItem("citiesArray"))
     renderFavorites()
 }
+  
+let cities
+if (localStorage.getItem("citiesArray")) {
+    cities = JSON.parse(localStorage.getItem("citiesArray"))
+} else {
+    cities = []
+}
 
-let cities = [ 'Tiraspol', 'Bendery', 'Parcani']  
 document.querySelector('#favorite_button').addEventListener('click', addCity)
 renderFavorites()
 getWeather('Москва')
