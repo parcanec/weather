@@ -1,4 +1,5 @@
-import { toStorage } from "./local.js";
+import { toStorage } from "./local.js"
+import { lastFavoriteViewed } from "./local.js"
 
 const tabs = document.querySelector(".info");
 const tabButton = tabs.querySelectorAll(".tabs_item"); 
@@ -85,11 +86,15 @@ function renderFavorites() {
       li.addEventListener('click', showFromFavorite)
       favList.append(li)
     }
+    lastCity = localStorage.getItem("lastCity")
 }
 
-function showFromFavorite(event) {
+function showFromFavorite(event, lastCity) {
     let city = event.target.textContent
     getWeather(city)
+    lastFavoriteViewed(city)
+    console.log (city)
+    console.log (lastCity)
 }
 
 function delCity(event, city) {
@@ -120,6 +125,8 @@ function addCity() {
 }
   
 let cities
+let lastCity
+
 if (localStorage.getItem("citiesArray")) {
     cities = JSON.parse(localStorage.getItem("citiesArray"))
 } else {
@@ -128,4 +135,4 @@ if (localStorage.getItem("citiesArray")) {
 
 document.querySelector('#favorite_button').addEventListener('click', addCity)
 renderFavorites()
-getWeather('Москва')
+getWeather(lastCity)
