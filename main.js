@@ -52,6 +52,7 @@ function toHumanDate(timestamp) {
 }
 
 function render(chekBase) {
+    document.querySelector('.error').textContent = ''
     const iconsUrl = '//openweathermap.org/img/wn/'
     let city = chekBase.name
     let icon = chekBase.weather[0].icon
