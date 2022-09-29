@@ -87,6 +87,11 @@ function renderFavorites() {
       favList.append(li)
     }
     lastCity = localStorage.getItem("lastCity")
+    if (localStorage.getItem("lastCity")) {
+        getWeather(lastCity)
+    } else {
+        getWeather('Moscow')
+    }
 }
 
 function showFromFavorite(event, lastCity) {
@@ -135,4 +140,3 @@ if (localStorage.getItem("citiesArray")) {
 
 document.querySelector('#favorite_button').addEventListener('click', addCity)
 renderFavorites()
-getWeather(lastCity)
