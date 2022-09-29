@@ -87,7 +87,7 @@ function renderFavorites() {
 }
 
 function showFromFavorite(event) {
-    city = event.target.textContent
+    let city = event.target.textContent
     getWeather(city)
 }
 
