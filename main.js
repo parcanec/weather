@@ -47,9 +47,8 @@ function startSearch(env) {
 }
 
 function toHumanDate(timestamp) {
-    let hours = new Date(timestamp*1000).getHours()
-    let minutes = new Date(timestamp*1000).getMinutes()
-    return (hours + ':' + minutes)
+    let time = new Date(timestamp*1000)
+    return time.toLocaleTimeString() 
 }
 
 function render(chekBase) {
