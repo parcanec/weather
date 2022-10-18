@@ -26,20 +26,22 @@ const cityForm = document.querySelectorAll('.city')
 searchButton.addEventListener('click', startSearch)
 
 async function getWeather(cityName) {
-    const serverUrl = '//api.openweathermap.org/data/2.5/weather'
-    const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f'
-    const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`
-    fetch(url)
-      .then(response => response.json())
-      .then(chekBase => {
-              if(chekBase.cod >= 300)
-                throw new Error(chekBase.message)
-              else
-                render(chekBase)
-    })
-      .catch(error => document.querySelector('.error').textContent = error.message)
+    try {
+        const serverUrl = '//api.openweathermap.org/data/2.5/weather'
+        const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f'
+        const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`
+        const response = await fetch(url)
+        const chekBase = await response.json()
+        if (chekBase.cod >= 300) {
+            throw new Error(chekBase.message)
+        } else {
+            render(chekBase)
+        }
+    } catch {
+        error => document.querySelector('.error').textContent = error.message
+    }
 }
-  
+
 function startSearch(env) {
     env.preventDefault()
     const citySearchName = searchPhrase.value
