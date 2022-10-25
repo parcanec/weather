@@ -1,0 +1,30 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "iP strada project",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parcanec/weather.git"
+  },
+  "keywords": [
+    "weather",
+    "iP"
+  ],
+  "author": "Igor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/parcanec/weather/issues"
+  },
+  "homepage": "https://github.com/parcanec/weather#readme",
+  "dependencies": {
+    "date-fns": "^2.29.3",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "parcel": "^2.7.0"
+  }
+}

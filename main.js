@@ -1,5 +1,6 @@
 import { toStorage } from "./local.js"
 import { lastFavoriteViewed } from "./local.js"
+import { format } from 'date-fns'
 
 const tabs = document.querySelector(".info");
 const tabButton = tabs.querySelectorAll(".tabs_item"); 
@@ -48,10 +49,10 @@ function startSearch(env) {
     getWeather(citySearchName)
 }
 
-function toHumanDate(timestamp) {
-    let time = new Date(timestamp*1000)
-    return time.toLocaleTimeString() 
-}
+//function toHumanDate(timestamp) {
+//    let time = new Date(timestamp*1000)
+//    return time.toLocaleTimeString() 
+//}
 
 function render(chekBase) {
     document.querySelector('.error').textContent = ''
@@ -61,8 +62,11 @@ function render(chekBase) {
     let temp = Math.round(chekBase.main.temp)
     let feelsLike = Math.round(chekBase.main.feels_like)
     let weather = chekBase.weather[0].main
-    let sunrise = toHumanDate(chekBase.sys.sunrise)
-    let sunset = toHumanDate(chekBase.sys.sunset)
+    
+    let sunrise = format(new Date(chekBase.sys.sunrise)*1000, "HH:mm")
+    let sunset = format(new Date(chekBase.sys.sunset)*1000, "HH:mm")
+    //let sunrise = toHumanDate(chekBase.sys.sunrise)
+    //let sunset = toHumanDate(chekBase.sys.sunset)
 
     cityForm.forEach(anyCity => {
         anyCity.textContent = city
